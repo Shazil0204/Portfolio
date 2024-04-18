@@ -18,8 +18,8 @@ function App() {
   ];
 
   return (
-    <div>
-      <Navbar title="Fuck you it works Marcus" links={navlinks}/>
+    <div className="bg-black/80 h-screen text-white">
+      <Navbar links={navlinks}/>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/about" element={<About />} />

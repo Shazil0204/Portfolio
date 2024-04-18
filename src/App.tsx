@@ -1,24 +1,35 @@
 import { Route, useLocation, Routes } from "react-router-dom";
-import Navbar from "./Components/Navbar"
+import { AnimatePresence } from "framer-motion";
+
 import Home from "./Pages/Home";
 import About from "./Pages/About";
+import Login from "./Pages/Login";
 import Contact from "./Pages/Contact";
-import Services from "./Pages/Services";
+import Navbar from "./Components/Navbar";
 
 function App() {
   const location = useLocation();
 
+  let navlinks = [
+    { name: "Home" , path: "/" },
+    { name: "About" , path: "/about"   },
+    { name: "Contact" , path: "/contact"   },
+    { name: "Login" , path: "/login"   },
+  ];
+
   return (
     <div>
-      <Navbar />
+      <Navbar title="Fuck you it works Marcus" links={navlinks}/>
+      <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/Login" element={<Services />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="*" element={<Home />} />
         </Routes>
+      </AnimatePresence>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

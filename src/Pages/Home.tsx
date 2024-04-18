@@ -1,12 +1,26 @@
+import { Link } from "react-router-dom";
 import transition from "../Components/transition";
 
 function Home() {
   return (
-    <div>
-      <h1 className="w-4/5 absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 text-center text-[10vw] font-medium leading-none uppercase">
-        Home
-      </h1>
-    </div>
+    <>
+      <div className="h-screen">
+        <div className="flex justify-center item-center h-screen">
+          <p>Hello</p>
+          <p>I'm Shazil A programmer</p>
+          <p>
+            I am a beginner program with experience in creating website using
+            ASP.NET and React with Typescript
+          </p>
+          <Link to={"/contact"}>Contact Me</Link>
+        </div>
+        <img
+          className="absolute top-0 right-0 h-full w-full -z-10"
+          src="./MainImg.jpg"
+        ></img>
+      </div>
+      <div className="h-screen text-black">hello </div>
+    </>
   );
 }
 

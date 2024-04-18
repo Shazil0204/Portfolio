@@ -18,7 +18,7 @@ function App() {
   ];
 
   return (
-    <div className="bg-black/80 h-screen text-white">
+    <div className="text-white">
       <Navbar links={navlinks}/>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>

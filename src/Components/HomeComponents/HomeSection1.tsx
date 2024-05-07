@@ -9,17 +9,17 @@ const HomeSection1: React.FC<HomeSection1Props> = ({ scrollToSection2 }) => {
   return (
     <div className="min-h-screen min-w-full">
       <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center">
-        <div className="font-mono">
-          <p className="text-[3vw]">
+        <img className="top-0 right-0 -z-10 hidden lg:flex shadow-b-2xl" src="/MainImg-removebg-preview.png"></img>
+        <div className="font-mono  px-10">
+          <p className="text-[4vh] lg:text-[3vw] text-center lg:text-left">
             Hej, and <span className="text-green-500">Welcome</span> to
-          </p>
-          <p className="text-[3vw]">
-            <strong className="text-[4vw] text-yellow-500">
+            <br/>
+            <strong className="text-[5vh] text-yellow-500">
               Shazil Shahid's
             </strong>{" "}
             Portfolio
           </p>
-          <p className="text-2xl hidden lg:flex bg-black text-white p-2 rounded-lg text-justify">
+          <p className="text-2xl hidden lg:flex shadow-2xl text-white p-2 rounded-lg text-justify">
             As a programming student based in Denmark, I'm eager to embark on
             new challenges and contribute to innovative projects. Explore my
             portfolio to discover my journey in the world of programming

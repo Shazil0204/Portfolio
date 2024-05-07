@@ -5,7 +5,7 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Login from "./Pages/Login";
 import Contact from "./Pages/Contact";
-import Navbar from "./Components/Navbar";
+import Navbar from "./Components/Navbar/Navbar";
 
 function App() {
   const location = useLocation();
@@ -17,9 +17,16 @@ function App() {
     { name: "Login" , path: "/login"   },
   ];
 
+  let languageLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Login", path: "/login" },
+  ];
+
   return (
     <div className="text-white">
-      <Navbar links={navlinks}/>
+      <Navbar links={navlinks} languageLinks={languageLinks}/>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/about" element={<About />} />

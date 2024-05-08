@@ -4,7 +4,7 @@ import {
   faBars,
   faX,
   faArrowDown,
-  faArrowUp
+  faArrowUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
@@ -12,14 +12,12 @@ import { useState } from "react";
 
 interface NavbarProps {
   title?: string;
-  links: { name: string; path: string }[];
-  languageLinks: { name: string; path: string }[];
+  pageLinks: { name: string; path: string }[];
 }
 
 const Navbar: React.FC<NavbarProps> = ({
   title = "Portfolio",
-  links,
-  languageLinks,
+  pageLinks,
 }) => {
   const [isBarOpen, setIsBarOpen] = useState(false);
   const [isBarVisible, setIsBarVisible] = useState(false);
@@ -52,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = ({
         {/* Navigation Links */}
         <ul className="flex ">
           <li>
-            {links.map((link) => (
+            {pageLinks.map((link) => (
               <Link
                 className="text-white duration-300 p-5 rounded-xl underline underline-offset-4 hover:text-yellow-500 mx-1 font-mono"
                 to={link.path}
@@ -62,32 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({
               </Link>
             ))}
           </li>
-          <button className="ml-5" onClick={onClickDropDown1}>
-            Languages{" "}
-            <FontAwesomeIcon icon={dropDown1 ? faArrowUp : faArrowDown} />
-            {dropDown1 && (
-              <div className="mt-5 top-12 absolute space-y-5">
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">C#</p>
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">HTML</p>
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">CSS</p>
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">JS</p>
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">PHP</p>
-              </div>
-            )}
-          </button>
-          <button className="ml-5" onClick={onClickDropDown2}>
-            Framework{" "}
-            <FontAwesomeIcon icon={dropDown2 ? faArrowUp : faArrowDown} />
-            {dropDown2 && (
-              <div className="mt-5 top-12 absolute space-y-5">
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">C#</p>
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">HTML</p>
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">CSS</p>
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">JS</p>
-                <p className="bg-yellow-600 p-1 px-6 rounded-xl">PHP</p>
-              </div>
-            )}
-          </button>
+
         </ul>
       </div>
       <Link
@@ -109,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({
       {isBarVisible && (
         <ul className="pr-2 lg:hidden">
           <li className="bg-gray-700 py-2 rounded-lg text-center">
-            {links.map((link) => (
+            {pageLinks.map((link) => (
               <Link
                 className="flex flex-row bg-gray-500 text-white duration-300 rounded-xl mb-5 p-1 text-center hover:text-yellow-500 hover:bg-white/10 mx-1 font-mono"
                 to={link.path}
@@ -118,7 +91,6 @@ const Navbar: React.FC<NavbarProps> = ({
                 {link.name}
               </Link>
             ))}
-            <li>languages</li>
             <button
               onClick={toggleBar}
               className="text-red-500 duration-300 rounded-xl p-1 text-center hover:text-red-700 mx-1 font-mono"

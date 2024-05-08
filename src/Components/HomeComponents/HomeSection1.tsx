@@ -32,7 +32,7 @@ const HomeSection1: React.FC<HomeSection1Props> = ({ scrollToSection2 }) => {
       >
         <FontAwesomeIcon
           icon={faArrowDown}
-          className="p-4 rounded-full bg-white/10 hover:bg-white hover:text-black duration-100"
+          className="animate-bounce p-4 rounded-full bg-white/10 hover:bg-white hover:text-black duration-100"
         />{" "}
       </button>
     </div>

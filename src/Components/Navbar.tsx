@@ -3,8 +3,6 @@ import {
   faEnvelope,
   faBars,
   faX,
-  faArrowDown,
-  faArrowUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
@@ -15,26 +13,13 @@ interface NavbarProps {
   pageLinks: { name: string; path: string }[];
 }
 
-const Navbar: React.FC<NavbarProps> = ({
-  title = "Portfolio",
-  pageLinks,
-}) => {
+const Navbar: React.FC<NavbarProps> = ({ title = "Portfolio", pageLinks }) => {
   const [isBarOpen, setIsBarOpen] = useState(false);
   const [isBarVisible, setIsBarVisible] = useState(false);
-  const [dropDown1, setDropDown1] = useState(false);
-  const [dropDown2, setDropDown2] = useState(false);
 
   const toggleBar = () => {
     setIsBarOpen(!isBarOpen);
     setIsBarVisible(!isBarVisible);
-  };
-
-  const onClickDropDown1 = () => {
-    setDropDown1(!dropDown1);
-  };
-
-  const onClickDropDown2 = () => {
-    setDropDown2(!dropDown2);
   };
 
   return (
@@ -60,12 +45,11 @@ const Navbar: React.FC<NavbarProps> = ({
               </Link>
             ))}
           </li>
-
         </ul>
       </div>
       <Link
         to="/contact"
-        className="hidden lg:block px-2 rounded-xl bg-white text-black mx-2 hover:bg-green-500 duration-300 hover:-rotate-12"
+        className="hidden lg:block px-2 pt-1 rounded-xl bg-white text-black mx-2 hover:bg-green-500 duration-300 hover:-rotate-12"
       >
         <FontAwesomeIcon icon={faEnvelope} /> Contact me
       </Link>

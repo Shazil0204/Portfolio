@@ -4,14 +4,21 @@ import React from "react";
 import Swal from "sweetalert2";
 
 const Footer: React.FC = () => {
-  const ShowOfferInfo = () => {
+  const showOfferInfo = () => {
     Swal.fire("The Internet");
   };
+
+  const isOnOffersPage = location.pathname === "/offers";
+
   return (
-    <button className="fixed z-10 bg-black/25 p-2 rounded-full bottom-2 right-2 animate-ping hover:animate-none" onClick={ShowOfferInfo}>
-      <FontAwesomeIcon icon={faInfoCircle}/>
-    </button>
+    !isOnOffersPage && (
+      <button
+        className="fixed z-10 bg-black/25 p-2 rounded-full bottom-2 right-2 animate-ping hover:animate-none"
+        onClick={showOfferInfo}
+      >
+        <FontAwesomeIcon icon={faInfoCircle} />
+      </button>
+    )
   );
 };
-
 export default Footer;

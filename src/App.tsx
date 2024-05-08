@@ -6,6 +6,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import Offers from "./Pages/Offers";
 
 function App() {
   const location = useLocation();
@@ -13,7 +14,8 @@ function App() {
   const pageLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
-    { name: "I can", path: "/ICan" },
+    { name: "I can", path: "/iCan" },
+    { name: "Offers", path: "/offers" },
   ];
 
   return (
@@ -26,6 +28,7 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/offers" element={<Offers/>} />
           <Route path="*" element={<Home />} />
         </Routes>
       </AnimatePresence>

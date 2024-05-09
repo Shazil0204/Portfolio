@@ -26,8 +26,8 @@ const Offers = () => {
     <>
       <div className="text-white min-h-screen bg-gray-800">
         <div className="flex justify-center items-center h-full">
-          <div className="grid lg:grid-cols-3 gap-12 container mx-2 lg:mx-auto text-center space-y-12 lg:space-y-0 rounded-lg">
-            <p className="lg:col-span-3 mt-32 uppercase font-extrabold text-md lg:text-lg 2xl:text-2xl 6xl:text-6xl">
+          <div className="grid lg:grid-cols-3 gap-12 container mx-12 lg:mx-auto text-center space-y-12 lg:space-y-0 rounded-lg">
+            <p className="lg:col-span-3 mt-32 uppercase font-extrabold text-lg 2xl:text-2xl 6xl:text-6xl">
               Programming Apprenticeship Opportunities
             </p>
             {apprenticeshipOffers.map((offer) => (

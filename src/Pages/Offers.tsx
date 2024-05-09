@@ -3,25 +3,22 @@ import transition from "../Components/transition";
 const Offers = () => {
   const apprenticeshipOffers = [
     {
-      title: "Basic",
-      price: "$9.99/month",
-      features: ["Feature 1", "Feature 2", "Feature 3"],
+      title: "Two-Week Apprenticeship",
+      duration: "2 weeks",
+      discription:
+        "Experience my skills and work ethic with a two-week apprenticeship. During this time, you'll have the opportunity to assess my capabilities and fit within your team. If satisfied, you can hire me as a student for the remainder of my studies.",
     },
     {
-      title: "Pro",
-      price: "$19.99/month",
-      features: ["Feature 1", "Feature 2", "Feature 3", "Feature 4"],
+      title: "One-Month Apprenticeship",
+      duration: "1 month",
+      discription:
+        "Extend the apprenticeship to one month for a deeper dive into projects and tasks. This extended period allows for a comprehensive evaluation of my skills and potential fit within your organization. If impressed, you have the option to offer me a full-time position",
     },
     {
-      title: "Premium",
-      price: "$29.99/month",
-      features: [
-        "Feature 1",
-        "Feature 2",
-        "Feature 3",
-        "Feature 4",
-        "Feature 5",
-      ],
+      title: "Straight Away Hiring or Interview",
+      duration: "Rest of my Education",
+      discription:
+        "Skip the apprenticeship period and proceed directly to hiring or interviewing. Ideal for companies with urgent talent needs or a rigorous hiring process. This option provides an immediate opportunity to assess compatibility and fit",
     },
   ];
 
@@ -33,63 +30,24 @@ const Offers = () => {
             <p className="lg:col-span-3 mt-32 uppercase font-extrabold text-md lg:text-lg 2xl:text-2xl 6xl:text-6xl">
               Programming Apprenticeship Opportunities
             </p>
-            <div className="text-justify p-4 rounded-2xl bg-gray-600 shadow-xl shadow-slate-900">
-              <p className="mt-4 text-center font-bold underline underline-offset-4 uppercase text-emerald-500">
-                Two-Week Apprenticeship
-              </p>
-              <p className="mt-4">
-                <strong className="text-yellow-300">Duration:</strong>{" "}
-                <span className="underline underline-offset-4">2 weeks</span>
-              </p>
-              <p className="mt-4 tracking-wide">
-                <strong className="text-yellow-300">Description:</strong>{" "}
-                Experience my skills and work ethic with a two-week
-                apprenticeship. During this time, you'll have the opportunity to
-                assess my capabilities and fit within your team. If satisfied,
-                you can hire me as a student for the remainder of my studies.
-              </p>
-              <button className="my-4 w-full p-2 bg-gray-100 rounded-b-lg text-black shadow-lg shadow-slate-900 hover:shadow-none duration-300">
-                Explore Offer
-              </button>
-            </div>
-            <div className="text-justify p-4 rounded-2xl bg-gray-600 shadow-xl shadow-slate-900">
-              <p className="mt-4 text-center font-bold underline underline-offset-4 uppercase text-emerald-500">
-                Two-Week Apprenticeship
-              </p>
-              <p className="mt-4">
-                <strong className="text-yellow-300">Duration:</strong>{" "}
-                <span className="underline underline-offset-4">2 weeks</span>
-              </p>
-              <p className="mt-4 tracking-wide">
-                <strong className="text-yellow-300">Description:</strong>{" "}
-                Experience my skills and work ethic with a two-week
-                apprenticeship. During this time, you'll have the opportunity to
-                assess my capabilities and fit within your team. If satisfied,
-                you can hire me as a student for the remainder of my studies.
-              </p>
-              <button className="my-4 w-full p-2 bg-gray-100 rounded-b-lg text-black shadow-lg shadow-slate-900 hover:shadow-none duration-300">
-                Explore Offer
-              </button>
-            </div>
-            <div className="text-justify p-4 rounded-2xl bg-gray-600 shadow-xl shadow-slate-900">
-              <p className="mt-4 text-center font-bold underline underline-offset-4 uppercase text-emerald-500">
-                Two-Week Apprenticeship
-              </p>
-              <p className="mt-4">
-                <strong className="text-yellow-300">Duration:</strong>{" "}
-                <span className="underline underline-offset-4">2 weeks</span>
-              </p>
-              <p className="mt-4 tracking-wide">
-                <strong className="text-yellow-300">Description:</strong>{" "}
-                Experience my skills and work ethic with a two-week
-                apprenticeship. During this time, you'll have the opportunity to
-                assess my capabilities and fit within your team. If satisfied,
-                you can hire me as a student for the remainder of my studies.
-              </p>
-              <button className="my-4 w-full p-2 bg-gray-100 rounded-b-lg text-black shadow-lg shadow-slate-900 hover:shadow-none duration-300">
-                Explore Offer
-              </button>
-            </div>
+            {apprenticeshipOffers.map((offer) => (
+              <div className="text-justify p-4 rounded-2xl bg-gray-600 shadow-xl shadow-slate-900">
+                <p className="mt-4 text-center font-bold underline underline-offset-4 uppercase text-emerald-500">
+                  {offer.title}
+                </p>
+                <p className="mt-4">
+                  <strong className="text-yellow-300">Duration:</strong>{" "}
+                  <span className="underline underline-offset-4">{ offer.duration}</span>
+                </p>
+                <p className="mt-4 tracking-wide">
+                  <strong className="text-yellow-300">Description:</strong>{" "}
+                  {offer.discription}
+                </p>
+                <button className="my-4 w-full p-2 bg-gray-100 rounded-b-lg text-black shadow-lg shadow-slate-900 hover:shadow-none duration-300">
+                  Explore Offer
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import Contact from "./Pages/Contact";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import Offers from "./Pages/Offers";
+import Languages from "./Pages/Languages";
 
 function App() {
   const location = useLocation();
@@ -16,6 +17,7 @@ function App() {
     { name: "About", path: "/about" },
     { name: "I can", path: "/iCan" },
     { name: "Offers", path: "/offers" },
+    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -29,6 +31,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/offers" element={<Offers/>} />
+          <Route path="/Languages" element={<Languages/>} />
           <Route path="*" element={<Home />} />
         </Routes>
       </AnimatePresence>

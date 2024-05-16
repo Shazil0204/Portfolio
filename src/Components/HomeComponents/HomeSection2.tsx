@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 function HomeSection2() {
   const BTNLink = [
-    { name: "Languages", path: "/language" },
-    { name: "Framworks", path: "/Framework" },
-    { name: "Librarys", path: "/Library" },
+    { name: "Languages", path: "/Languages" },
+    { name: "Frameworks", path: "/Frameworks" },
+    { name: "Libraries", path: "/Libraries" },
   ];
 
   return (

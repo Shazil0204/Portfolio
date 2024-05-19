@@ -33,13 +33,10 @@ function Contact() {
 
   return (
     <div className="h-screen flex justify-center items-center bg-gradient-to-b from-rose-700/50 to-indigo-700/75">
-      <div className="p-12 rounded-xl bg-gradient-to-b from-rose-700/50 to-indigo-700/75 w-[30rem]">
+      <div className="p-12 rounded-xl bg-white/25 w-[30rem]">
         <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto">
           <div className="mb-4">
-            <label
-              htmlFor="name"
-              className="block text-white font-bold mb-2"
-            >
+            <label htmlFor="name" className="block text-white font-bold mb-2">
               Name:
             </label>
             <input
@@ -54,10 +51,7 @@ function Contact() {
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-white font-bold mb-2"
-            >
+            <label htmlFor="email" className="block text-white font-bold mb-2">
               Email:
             </label>
             <input

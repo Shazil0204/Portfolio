@@ -36,13 +36,17 @@ const Navbar: React.FC<NavbarProps> = ({ title = "Portfolio", pageLinks }) => {
         <ul className="flex ">
           <li>
             {pageLinks.map((link) => (
-              <Link
-                className="text-white duration-300 p-5 rounded-xl underline underline-offset-4 hover:text-yellow-500 mx-1 font-mono"
-                to={link.path}
-                key={link.name}
-              >
-                {link.name}
-              </Link>
+              <>
+                {link.name !== "Contact" && (
+                  <Link
+                    className="text-white duration-300 p-5 rounded-xl underline underline-offset-4 hover:text-yellow-500 mx-1 font-mono"
+                    to={link.path}
+                    key={link.name}
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </>
             ))}
           </li>
         </ul>
@@ -53,6 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ title = "Portfolio", pageLinks }) => {
       >
         <FontAwesomeIcon icon={faEnvelope} /> Contact me
       </Link>
+
       {/* here is the code for the navbar btn that will be visible on mobile */}
 
       <button

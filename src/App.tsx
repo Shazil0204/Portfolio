@@ -2,25 +2,27 @@ import { Route, useLocation, Routes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 import Home from "./Pages/Home";
-import About  from "./Pages/About";
+import About from "./Pages/About";
 import Offers from "./Pages/Offers";
-import Contact  from "./Pages/Contact";
-import CSS  from "./Pages/Languages/CSS";
-import SQL  from "./Pages/Languages/SQL";
-import Navbar from "./Components/Navbar";
+import Contact from "./Pages/Contact";
+import CSS from "./Pages/Languages/CSS";
+import SQL from "./Pages/Languages/SQL";
 import Footer from "./Components/Footer";
-import PHP  from "./Pages/Frameworks/PHP";
-import Languages  from "./Pages/Languages";
-import Libraries  from "./Pages/Libraries";
+import PHP from "./Pages/Frameworks/PHP";
+import Languages from "./Pages/Languages";
+import Libraries from "./Pages/Libraries";
 import HTML from "./Pages/Languages/HTML";
 import SCSS from "./Pages/Libraries/SCSS";
 import Frameworks from "./Pages/Frameworks";
-import React  from "./Pages/Libraries/React";
+import React from "./Pages/Libraries/React";
 import CSharp from "./Pages/Languages/CSharp";
-import Bootstrap  from "./Pages/Frameworks/Bootstrap";
+import Bootstrap from "./Pages/Frameworks/Bootstrap";
 import JavaScript from "./Pages/Languages/JavaScript";
 import TypeScript from "./Pages/Languages/TypeScript";
-import TailwindCSS  from "./Pages/Libraries/TailwindCSS";
+import TailwindCSS from "./Pages/Libraries/TailwindCSS";
+import Navbar from "./Components/NavbarComponents/Navbar";
+import Sidebar from "./Components/NavbarComponents/Sidebar";
+import useWindowDimensions from "./hooks/useWindowDimensions";
 
 function App() {
   const location = useLocation();
@@ -33,9 +35,15 @@ function App() {
     { name: "Contact", path: "/contact" },
   ];
 
+  const navigationComponent =
+    useWindowDimensions().width > 1024 ? (
+      <Navbar pageLinks={pageLinks} />
+    ) : (
+      <Sidebar pageLinks={pageLinks} />
+    );
   return (
     <div className="text-white">
-      <Navbar pageLinks={pageLinks} />
+      {navigationComponent}
       <Footer />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>

@@ -1,99 +1,164 @@
+import { useState, ChangeEvent, FormEvent } from "react";
+import CryptoJS from "crypto-js";
 import transition from "../Components/transition";
-import { useState } from "react";
 
-function Contact() {
-  // State variables to store form data
-  const [formData, setFormData] = useState({
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
+const Contact: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
+    phone: "",
     message: "",
   });
 
-  // Function to handle form input changes
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
 
-  // Function to handle form submission
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    // You can perform form validation and submission logic here
-    console.log(formData); // For demonstration, logging form data to console
-    // Reset form fields after submission
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
     setFormData({
-      name: "",
-      email: "",
-      message: "",
+      ...formData,
+      [name]: value,
     });
   };
 
+  const validateForm = () => {
+    const errors: Partial<FormData> = {};
+
+    if (!formData.name) {
+      errors.name = "Name is required";
+    }
+
+    if (!formData.email) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Email address is invalid";
+    }
+
+    if (formData.message.length > 1024) {
+      errors.message = "Message must be 1024 characters or less";
+    }
+
+    return errors;
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const errors = validateForm();
+    if (Object.keys(errors).length === 0) {
+      // Encrypt the form data
+      const encryptedFormData = {
+        name: CryptoJS.AES.encrypt(formData.name, "secret key").toString(),
+        email: CryptoJS.AES.encrypt(formData.email, "secret key").toString(),
+        phone: CryptoJS.AES.encrypt(formData.phone, "secret key").toString(),
+        message: CryptoJS.AES.encrypt(
+          formData.message,
+          "secret key"
+        ).toString(),
+      };
+
+      // Send the encrypted form data to PHP server
+      try {
+        const response = await fetch("http://your-server-url/submit.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(encryptedFormData),
+        });
+        if (response.ok) {
+          console.log("Form submitted successfully");
+        } else {
+          console.error("Failed to submit form");
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
+    } else {
+      setFormErrors(errors);
+    }
+  };
+
   return (
-    <div className="h-screen flex justify-center items-center bg-gradient-to-b from-rose-700/50 to-indigo-700/75">
-      <div className="p-12 rounded-xl bg-white/25 w-[30rem]">
-        <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto">
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-white font-bold mb-2">
-              Name:
-            </label>
+    <div className="flex items-center justify-center min-h-screen bg-emerald-950">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded shadow-md w-full max-w-md"
+      >
+        <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+        <div className="mb-4">
+          <label className="block text-gray-700">
+            Name:
             <input
               type="text"
-              id="name"
               name="name"
+              required
               value={formData.name}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Your Name"
-              required
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
             />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-white font-bold mb-2">
-              Email:
-            </label>
+          </label>
+          {formErrors.name && (
+            <p className="text-red-500 text-sm">{formErrors.name}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">
+            Email:
             <input
               type="email"
-              id="email"
               name="email"
+              required
               value={formData.email}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Your Email"
-              required
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
             />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="message"
-              className="block text-white font-bold mb-2"
-            >
-              Message:
-            </label>
+          </label>
+          {formErrors.email && (
+            <p className="text-red-500 text-sm">{formErrors.email}</p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">
+            Phone (optional):
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </label>
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">
+            Message:
             <textarea
-              id="message"
               name="message"
+              required
               value={formData.message}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 resize-none"
-              placeholder="Your Message"
-              required
+              maxLength={1024}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
             />
-          </div>
-          <div className="flex items-center justify-end">
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+          </label>
+          {formErrors.message && (
+            <p className="text-red-500 text-sm">{formErrors.message}</p>
+          )}
+        </div>
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+          Submit
+        </button>
+      </form>
     </div>
   );
-}
+};
 
 export default transition(Contact);

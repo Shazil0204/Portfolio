@@ -1,4 +1,5 @@
 import transition from "../Components/transition";
+import { Link } from "react-router-dom";
 
 const Offers = () => {
   const apprenticeshipOffers = [
@@ -43,9 +44,12 @@ const Offers = () => {
                   <strong className="text-yellow-300">Description:</strong>{" "}
                   {offer.discription}
                 </p>
-                <button className="my-4 w-full p-2 bg-gray-100 rounded-b-lg text-black shadow-lg shadow-slate-900 hover:shadow-none duration-300">
-                  Explore Offer
-                </button>
+                
+                <Link to={"/contact"}>
+                  <button className="my-4 w-full p-2 text-center bg-gray-100 rounded-b-lg text-black shadow-lg shadow-slate-900 hover:shadow-none duration-300">
+                    Please Contact for more details. Thanks!
+                  </button>
+                </Link>
               </div>
             ))}
           </div>

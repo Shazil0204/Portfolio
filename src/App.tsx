@@ -23,6 +23,7 @@ import TailwindCSS from "./Pages/Libraries/TailwindCSS";
 import Navbar from "./Components/NavbarComponents/Navbar";
 import Sidebar from "./Components/NavbarComponents/Sidebar";
 import useWindowDimensions from "./hooks/useWindowDimensions";
+import ICan from "./Pages/iCan"
 
 function App() {
   const location = useLocation();
@@ -49,6 +50,7 @@ function App() {
         <Routes location={location} key={location.pathname}>
           {/* These pages are the most common page that user will be using */}
           <Route path="/about" element={<About />} />
+          <Route path="/iCan" element={<ICan />} />
           <Route path="/offers" element={<Offers />} />
           <Route path="/contact" element={<Contact />} />
 

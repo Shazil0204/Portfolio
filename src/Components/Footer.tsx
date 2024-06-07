@@ -29,8 +29,12 @@ const Footer: React.FC = () => {
       )}
       {swalShown &&
         createPortal(
-          <Link className="p-1 bg-gray-200 text-blue-500 font-bold rounded-xl " to="/offers" onClick={() => Swal.close()}>
-            Click to Go to About
+          <Link
+            className="p-1 text-blue-500 font-bold rounded-xl "
+            to="/offers"
+            onClick={() => Swal.close()}
+          >
+            View Offers
           </Link>,
           Swal.getHtmlContainer()!
         )}

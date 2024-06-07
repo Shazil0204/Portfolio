@@ -1,4 +1,5 @@
 import React from "react";
+import transition from "../Components/transition";
 
 const About: React.FC = () => {
   return (
@@ -102,4 +103,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default transition(About);

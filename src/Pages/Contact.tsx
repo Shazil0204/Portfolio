@@ -1,89 +1,25 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import CryptoJS from "crypto-js";
+import { useState } from "react";
+import axios from "axios";
 import transition from "../Components/transition";
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-}
-
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formValue, setFormValue] = useState({
     name: "",
     email: "",
-    phone: "",
+    phoneNo: "",
     message: "",
   });
 
-  const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
-
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
-  const validateForm = () => {
-    const errors: Partial<FormData> = {};
-
-    if (!formData.name) {
-      errors.name = "Name is required";
-    }
-
-    if (!formData.email) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Email address is invalid";
-    }
-
-    if (formData.message.length > 1024) {
-      errors.message = "Message must be 1024 characters or less";
-    }
-
-    return errors;
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const errors = validateForm();
-    if (Object.keys(errors).length === 0) {
-      // Encrypt the form data
-      const encryptedFormData = {
-        name: CryptoJS.AES.encrypt(formData.name, "secret key").toString(),
-        email: CryptoJS.AES.encrypt(formData.email, "secret key").toString(),
-        phone: CryptoJS.AES.encrypt(formData.phone, "secret key").toString(),
-        message: CryptoJS.AES.encrypt(
-          formData.message,
-          "secret key"
-        ).toString(),
-      };
-
-      // Send the encrypted form data to PHP server
-      try {
-        const response = await fetch("http://your-server-url/submit.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(encryptedFormData),
-        });
-        if (response.ok) {
-          console.log("Form submitted successfully");
-        } else {
-          console.error("Failed to submit form");
-        }
-      } catch (error) {
-        console.error("Error submitting form:", error);
-      }
-    } else {
-      setFormErrors(errors);
-    }
+    console.log(formValue);
+    const res = await axios.post("http://localhost:1000", formValue);
   };
 
   return (
@@ -100,14 +36,11 @@ const Contact: React.FC = () => {
               type="text"
               name="name"
               required
-              value={formData.name}
+              value={formValue.name}
               onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded"
             />
           </label>
-          {formErrors.name && (
-            <p className="text-red-500 text-sm">{formErrors.name}</p>
-          )}
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">
@@ -116,22 +49,19 @@ const Contact: React.FC = () => {
               type="email"
               name="email"
               required
-              value={formData.email}
+              value={formValue.email}
               onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded"
             />
           </label>
-          {formErrors.email && (
-            <p className="text-red-500 text-sm">{formErrors.email}</p>
-          )}
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">
             Phone (optional):
             <input
-              type="text"
-              name="phone"
-              value={formData.phone}
+              type="number"
+              name="phoneNo"
+              value={formValue.phoneNo}
               onChange={handleChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded"
             />
@@ -143,19 +73,27 @@ const Contact: React.FC = () => {
             <textarea
               name="message"
               required
-              value={formData.message}
+              value={formValue.message}
               onChange={handleChange}
               maxLength={1024}
               className="mt-1 block w-full p-2 border border-gray-300 rounded"
             />
           </label>
-          {formErrors.message && (
-            <p className="text-red-500 text-sm">{formErrors.message}</p>
-          )}
         </div>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        <button
+          type="submit"
+          className="w-full mb-5 bg-blue-500 text-white p-2 rounded"
+        >
           Submit
         </button>
+        <p className="text-black text-justify">
+          Important Notice: Your information is not yet secure. Please be aware
+          that any information you provide through this contact form is
+          currently not encrypted and may be vulnerable to interception. Proceed
+          with caution and avoid sharing sensitive personal information at this
+          time. We are working on improving security measures to protect your
+          data.
+        </p>
       </form>
     </div>
   );
